@@ -2,6 +2,8 @@ package com.educandoweb.course.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +19,12 @@ public class User implements Serializable {
     private String password;
     private String phone;
 
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
     public User() {
     }
+
 
     public User(Long id, String name, String email, String password, String phone) {
         this.id = id;
@@ -66,8 +72,10 @@ public class User implements Serializable {
 
     public String getPhone() {
         return phone;
+    }
 
-
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
@@ -82,6 +90,7 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 
 
 }
